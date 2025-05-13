@@ -22,12 +22,42 @@ struct MapView: View {
     
     var body: some View {
         Map(coordinateRegion: $region, annotationItems: location, annotationContent: {
-            item in        
+            item in
             MapAnnotation(coordinate: item.location) {
                 MapAnnotationView(location: item)
             }
         })
-            
+        .overlay(
+            HStack {
+                Image("compass")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 48, height: 48, alignment: .center)
+                
+                VStack(alignment: .leading, spacing: 3) {
+                    HStack {
+                        Text("Latitud:")
+                            .font(.footnote)
+                            .fontWeight(.bold)
+                            .foregroundColor(.accentColor)
+                        Spacer()
+                        Text("\(region.center.latitude)")
+                            .font(.footnote)
+                            .foregroundColor(.white)
+                    }
+                    Divider()
+                }
+            }//: HSTACK
+                .padding(.vertical, 12)
+                .padding(.horizontal, 16)
+                .background(
+                    Color.black
+                        .cornerRadius(8)
+                        .opacity(0.6)
+                )
+                .padding()
+            , alignment: .top
+        )
     }
 }
 
