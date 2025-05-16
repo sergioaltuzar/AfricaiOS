@@ -10,6 +10,11 @@ import SwiftUI
 struct AnimalDetailView: View {
   // MARK: - PROPERTIES
   let animal: Animal
+    
+    var articulo: String {
+      let femeninos: Set<String> = ["zebra", "giraffe", "meerkat"]
+      return femeninos.contains(animal.id) ? "la" : "el"
+    }
   
   // MARK: - BODY
     var body: some View {
@@ -42,7 +47,7 @@ struct AnimalDetailView: View {
           
           // GALLERY
           Group {
-            HeadingView(headingImage: "photo.on.rectangle.angled", headingText: "Wilderness in Pictures")
+            HeadingView(headingImage: "photo.on.rectangle.angled", headingText: "Postales de la vida salvaje")
             
             InsetGalleryView(animal: animal)
           }
@@ -50,7 +55,7 @@ struct AnimalDetailView: View {
           
           // FACTS
           Group {
-            HeadingView(headingImage: "questionmark.circle", headingText: "Did you know?")
+            HeadingView(headingImage: "questionmark.circle", headingText: "¿Sabías que…?")
             
             InsetFactView(animal: animal)
           }
@@ -58,7 +63,7 @@ struct AnimalDetailView: View {
           
           // DESCRIPTION
           Group {
-            HeadingView(headingImage: "info.circle", headingText: "All about \(animal.name)")
+              HeadingView(headingImage: "info.circle", headingText: "Todo sobre el \(animal.name)")
             
             Text(animal.description)
               .multilineTextAlignment(.leading)
@@ -67,7 +72,7 @@ struct AnimalDetailView: View {
           .padding(.horizontal)
           // MAP
           Group {
-            HeadingView(headingImage: "map", headingText: "National Park")
+            HeadingView(headingImage: "map", headingText: "Parque Nacional")
           
             InsetMapView()
           }
@@ -75,13 +80,13 @@ struct AnimalDetailView: View {
           
           // LINK
           Group {
-            HeadingView(headingImage: "books.vertical", headingText: "Learn More")
+            HeadingView(headingImage: "books.vertical", headingText: "Más información")
             
             ExternalWeblinkView(animal: animal)
           }
           .padding(.horizontal)
         } //: VSTACK
-        .navigationBarTitle("Learn about \(animal.name)", displayMode: .inline)
+        .navigationBarTitle("Todo sobre \(articulo) \(animal.name.lowercased())", displayMode: .inline)
       } //: SCROLL
         
     }

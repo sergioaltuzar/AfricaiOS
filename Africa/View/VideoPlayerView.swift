@@ -9,11 +9,19 @@ import SwiftUI
 import AVKit
 
 struct VideoPlayerView: View {
+    
+    var videoSelected: String
+    var videoTitle: String
+    
     var body: some View {
-      VideoPlayer(player: AVPlayer(url: Bundle.main.url(forResource: "cheetah", withExtension: "mp4")!))
+        VStack {
+            VideoPlayer(player: playVideo(fileName: videoSelected, fileFormat: "mp4"))
+        }
+        .accentColor(.accentColor)
+        .navigationBarTitle(videoTitle, displayMode: .inline)
     }
 }
 
 #Preview {
-    VideoPlayerView()
+    VideoPlayerView(videoSelected: "lion", videoTitle: "Lion")
 }
